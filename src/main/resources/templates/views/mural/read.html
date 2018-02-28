@@ -17,17 +17,17 @@
             <div class="col-sm-4">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <h2 th:text="${product.name}">Naam ...</h2>
+                        <h2 th:text="${mural.name}">Naam ...</h2>
                         <div class="row">
                             <div class="col-xs-9">
                                 <p>
-                                    <span th:text="${product.description}">Descr</span><br/>
+                                    <span th:text="${mural.description}">Descr</span><br/>
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <a class="btn btn-default" th:href="'/product/' + ${product.id} + '/edit'" role="button">Edit</a>
+                <a class="btn btn-default" th:href="'/mural/' + ${mural.id} + '/edit'" role="button">Edit</a>
             </div>
         </div>
     </div>

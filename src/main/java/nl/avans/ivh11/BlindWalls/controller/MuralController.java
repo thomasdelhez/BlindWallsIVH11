@@ -1,7 +1,7 @@
-package nl.avans.ivh11.DemoApplication.controller;
+package nl.avans.ivh11.BlindWalls.controller;
 
-import nl.avans.ivh11.DemoApplication.domain.Product;
-import nl.avans.ivh11.DemoApplication.repository.ProductRepository;
+import nl.avans.ivh11.BlindWalls.domain.Product;
+import nl.avans.ivh11.BlindWalls.repository.ProductRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +18,9 @@ import java.util.ArrayList;
 
 @Controller
 @RequestMapping(value = "/product")
-public class ProductController {
+public class MuralController {
 
-    private final Logger logger = LoggerFactory.getLogger(ProductController.class);
+    private final Logger logger = LoggerFactory.getLogger(MuralController.class);
     private ArrayList<Product> products = new ArrayList<>();
 
     // Views constants
@@ -32,7 +32,7 @@ public class ProductController {
     private final ProductRepository productRepository;
 
     // Constructor with Dependency Injection
-    public ProductController(ProductRepository productRepository) {
+    public MuralController(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 

@@ -26,10 +26,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="product : ${products}">
-                    <td th:text="${product.id}">1</td>
-                    <td><a th:href="@{/product/{id}(id=${product.id})}" th:text="${product.name}">Name</a></td>
-                    <td th:text="${product.description}">Description</td>
+                <tr th:each="mural : ${products}">
+                    <td th:text="${mural.id}">1</td>
+                    <td><a th:href="@{/mural/{id}(id=${mural.id})}" th:text="${mural.name}">Name</a></td>
+                    <td th:text="${mural.description}">Description</td>
                 </tr>
             </tbody>
         </table>

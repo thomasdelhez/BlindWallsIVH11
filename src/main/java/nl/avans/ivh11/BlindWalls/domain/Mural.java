@@ -1,4 +1,4 @@
-package nl.avans.ivh11.DemoApplication.domain;
+package nl.avans.ivh11.BlindWalls.domain;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Product {
+public class Mural {
 
     @Id
     @GeneratedValue
@@ -19,9 +19,9 @@ public class Product {
     @NotEmpty(message = "Message is required.")
     private String description;
 
-    public Product() {}
+    public Mural() {}
 
-    public Product(String name, String description) {
+    public Mural(String name, String description) {
         this.name = name;
         this.description = description;
     }

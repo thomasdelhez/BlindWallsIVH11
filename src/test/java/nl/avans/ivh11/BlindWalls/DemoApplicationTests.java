@@ -1,4 +1,4 @@
-package nl.avans.ivh11.DemoApplication;
+package nl.avans.ivh11.BlindWalls;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

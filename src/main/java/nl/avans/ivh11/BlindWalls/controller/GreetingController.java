@@ -1,4 +1,4 @@
-package nl.avans.ivh11.DemoApplication.controller;
+package nl.avans.ivh11.BlindWalls.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
