@@ -27,6 +27,7 @@ public class MuralController {
     private final String VIEW_LIST_MURALS = "views/mural/list";
     private final String VIEW_CREATE_MURAL = "views/mural/create";
     private final String VIEW_READ_MURAL = "views/mural/read";
+    private final String VIEW_EDIT_MURAL = "views/mural/edit";
 
     @Autowired
     private final MuralRepository muralRepository;
@@ -88,8 +89,36 @@ public class MuralController {
     }
 
     @GetMapping(value = "{id}/edit")
-    public ModelAndView modifyForm(@PathVariable("id") Mural mural) {
-        return new ModelAndView(VIEW_CREATE_MURAL, "mural", mural);
+    public ModelAndView editMuralForm(@PathVariable("id") Mural mural) {
+        logger.debug("edit" + mural.getName() + mural.getDescription());
+
+        return new ModelAndView(VIEW_EDIT_MURAL, "mural", mural);
+    }
+
+    @RequestMapping(value="/edit", method = RequestMethod.POST)
+    public ModelAndView validateAndEditMural(
+            @Valid Mural mural,
+            final BindingResult bindingResult,
+            RedirectAttributes redirect) {
+
+        logger.debug("validateAndSaveMural - adding mural " + mural.getName());
+        if (bindingResult.hasErrors()) {
+            logger.debug("validateAndSaveMural - not added, bindingResult.hasErrors");
+            return new ModelAndView(VIEW_EDIT_MURAL, "formErrors", bindingResult.getAllErrors());
+        }
+
+        //
+        // ToDo: volgende acties naar de servicelaag verplaatsen.
+        //
+
+        //mural = this.muralRepository.save(mural);
+        mural.setDescription("ikbengoed");
+
+//        redirect.addFlashAttribute("globalMessage", "Successfully created a new message");
+//        return new ModelAndView("redirect:/mural/{mural.id}", "mural.id", mural.getId());
+
+        murals = (ArrayList<Mural>) this.muralRepository.findAll();
+        return new ModelAndView("redirect:/mural/{mural.id}", "mural.id", mural.getId());//return new ModelAndView(VIEW_LIST_MURALS, "murals", murals);
     }
 
 }
