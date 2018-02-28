@@ -1,7 +1,7 @@
 package nl.avans.ivh11.BlindWalls.controller;
 
-import nl.avans.ivh11.BlindWalls.domain.Product;
-import nl.avans.ivh11.BlindWalls.repository.ProductRepository;
+import nl.avans.ivh11.BlindWalls.domain.Mural;
+import nl.avans.ivh11.BlindWalls.repository.MuralRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,79 +17,79 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 
 @Controller
-@RequestMapping(value = "/product")
+@RequestMapping(value = "/mural")
 public class MuralController {
 
     private final Logger logger = LoggerFactory.getLogger(MuralController.class);
-    private ArrayList<Product> products = new ArrayList<>();
+    private ArrayList<Mural> murals = new ArrayList<>();
 
     // Views constants
-    private final String VIEW_LIST_PRODUCTS = "views/product/list";
-    private final String VIEW_CREATE_PRODUCT = "views/product/create";
-    private final String VIEW_READ_PRODUCT = "views/product/read";
+    private final String VIEW_LIST_MURALS = "views/mural/list";
+    private final String VIEW_CREATE_MURAL = "views/mural/create";
+    private final String VIEW_READ_MURAL = "views/mural/read";
 
     @Autowired
-    private final ProductRepository productRepository;
+    private final MuralRepository muralRepository;
 
     // Constructor with Dependency Injection
-    public MuralController(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public MuralController(MuralRepository muralRepository) {
+        this.muralRepository = muralRepository;
     }
 
     @GetMapping
-    public String listProducts(
+    public String listMurals(
             @RequestParam(value="category", required=false, defaultValue="all") String category,
             @RequestParam(value="size", required=false, defaultValue="10") String size,
             Model model) {
 
-        logger.debug("listProducts called.");
-        Iterable<Product> products = productRepository.findAll();
+        logger.debug("listMurals called.");
+        Iterable<Mural> murals = muralRepository.findAll();
 
         model.addAttribute("category", category);
         model.addAttribute("size", size);
-        model.addAttribute("products", products);
-        return VIEW_LIST_PRODUCTS;
+        model.addAttribute("murals", murals);
+        return VIEW_LIST_MURALS;
     }
 
     @GetMapping("{id}")
-    public ModelAndView view(@PathVariable("id") Product product) {
-        return new ModelAndView(VIEW_READ_PRODUCT, "product", product);
+    public ModelAndView view(@PathVariable("id") Mural mural) {
+        return new ModelAndView(VIEW_READ_MURAL, "mural", mural);
     }
 
     @RequestMapping(value="/new", method = RequestMethod.GET)
-    public String showCreateProductForm(final Product product, final ModelMap model) {
-        logger.debug("showCreateProductForm");
-        return VIEW_CREATE_PRODUCT;
+    public String showCreateMuralForm(final Mural mural, final ModelMap model) {
+        logger.debug("showCreateMuralForm");
+        return VIEW_CREATE_MURAL;
     }
 
     @RequestMapping(value="/new", method = RequestMethod.POST)
-    public ModelAndView validateAndSaveProduct(
-            @Valid Product product,
+    public ModelAndView validateAndSaveMural(
+            @Valid Mural mural,
             final BindingResult bindingResult,
             RedirectAttributes redirect) {
 
-        logger.debug("validateAndSaveProduct - adding product " + product.getName());
+        logger.debug("validateAndSaveMural - adding mural " + mural.getName());
         if (bindingResult.hasErrors()) {
-            logger.debug("validateAndSaveProduct - not added, bindingResult.hasErrors");
-            return new ModelAndView(VIEW_CREATE_PRODUCT, "formErrors", bindingResult.getAllErrors());
+            logger.debug("validateAndSaveMural - not added, bindingResult.hasErrors");
+            return new ModelAndView(VIEW_CREATE_MURAL, "formErrors", bindingResult.getAllErrors());
         }
 
         //
         // ToDo: volgende acties naar de servicelaag verplaatsen.
         //
 
-        product = this.productRepository.save(product);
+        mural = this.muralRepository.save(mural);
 
 //        redirect.addFlashAttribute("globalMessage", "Successfully created a new message");
-//        return new ModelAndView("redirect:/product/{product.id}", "product.id", product.getId());
+//        return new ModelAndView("redirect:/mural/{mural.id}", "mural.id", mural.getId());
 
-        products = (ArrayList<Product>) this.productRepository.findAll();
-        return new ModelAndView(VIEW_LIST_PRODUCTS, "products", products);
+        murals = (ArrayList<Mural>) this.muralRepository.findAll();
+        return new ModelAndView(VIEW_LIST_MURALS, "murals", murals);
     }
 
     @GetMapping(value = "{id}/edit")
-    public ModelAndView modifyForm(@PathVariable("id") Product product) {
-        return new ModelAndView(VIEW_CREATE_PRODUCT, "product", product);
+    public ModelAndView modifyForm(@PathVariable("id") Mural mural) {
+        return new ModelAndView(VIEW_CREATE_MURAL, "mural", mural);
     }
 
 }

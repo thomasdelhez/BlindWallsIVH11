@@ -9,15 +9,15 @@
     <div class="container">
 
         <div class="page-header">
-            <h1>List of products</h1>
+            <h1>List of murals</h1>
         </div>
         <p>More info here.</p>
 
-        <div th:if="${products.empty}">
-            <p>No products were found.</p>
+        <div th:if="${murals.empty}">
+            <p>No murals were found.</p>
         </div>
 
-        <table th:if="!${products.empty}" class="table table-hover">
+        <table th:if="!${murals.empty}" class="table table-hover">
             <thead>
                 <tr>
                     <th>Id</th>
@@ -26,7 +26,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="mural : ${products}">
+                <tr th:each="mural : ${murals}">
                     <td th:text="${mural.id}">1</td>
                     <td><a th:href="@{/mural/{id}(id=${mural.id})}" th:text="${mural.name}">Name</a></td>
                     <td th:text="${mural.description}">Description</td>
