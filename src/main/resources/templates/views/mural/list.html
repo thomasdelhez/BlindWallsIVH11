@@ -9,27 +9,26 @@
     <div class="container">
 
         <div class="page-header">
-            <h1>Lijst van muren murals</h1>
+            <h1>Lijst van muren</h1>
         </div>
-        <p>More info here.</p>
 
         <div th:if="${murals.empty}">
-            <p>No murals were found.</p>
+            <p>Geen muren gevonden.</p>
         </div>
 
         <table th:if="!${murals.empty}" class="table table-hover">
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Name</th>
-                    <th>Description</th>
+                    <th>Naam</th>
+                    <th>Omschrijving</th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="mural : ${murals}">
-                    <td th:text="${mural.id}">1</td>
-                    <td><a th:href="@{/mural/{id}(id=${mural.id})}" th:text="${mural.name}">Name</a></td>
-                    <td th:text="${mural.description}">Description</td>
+                    <td th:text="${mural.id}">Id</td>
+                    <td><a th:href="@{/mural/{id}(id=${mural.id})}" th:text="${mural.name}">Naam</a></td>
+                    <td th:text="${mural.description}">Omschrijving</td>
                 </tr>
             </tbody>
         </table>

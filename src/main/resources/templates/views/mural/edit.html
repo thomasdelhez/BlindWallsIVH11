@@ -9,9 +9,9 @@
 <div class="container">
 
     <div class="page-header">
-        <h1>Edit Mural</h1>
+        <h1>Wijzig muur</h1>
     </div>
-    <p>Edit a mural</p>
+    <p>Bewerk de gegevens van onderstaande muur</p>
 
     <form id="editMuralForm"
           action="#" th:action="@{/mural/edit}"
@@ -22,7 +22,7 @@
             Je kunt ook de melding bij het inputveld tonen (zie code hieronder) en evt. de CSS class
             van het inputveld veranderen. -->
         <ul th:if="${#fields.hasErrors('*')}" class="errorlist">
-            <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
+            <li th:each="err : ${#fields.errors('*')}" th:text="${err}">De opgegeven waarde is onjuist.</li>
         </ul>
 
         <div th:if="${#fields.hasErrors('*')}">
@@ -40,27 +40,27 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="form-group">
-                    <label for="name">Name</label>
+                    <label for="name">Naam</label>
                     <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'repository'-->
                     <input type="text" class="form-control" id="name" th:field="*{name}"/>
-                    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</p>
+                    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Naam Error</p>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label for="description">Description</label>
+                    <label for="description">Omschrijving</label>
                     <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'repository'-->
                     <input type="text" class="form-control" id="description" th:field="*{description}"/>
-                    <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Name Error</p>
+                    <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Omschrijving Error</p>
                 </div>
             </div>
         </div>
         <!-- De button die voor verzenden van het formulier zorgt.
             De name 'save' is een parameter waarmee in de MemberController de juiste
             save-actie wordt gestart. -->
-        <button type="submit" class="btn btn-primary" name="edit">Submit</button>
+        <button type="submit" class="btn btn-primary" name="edit">Wijzig</button>
     </form>
 </div>
 
