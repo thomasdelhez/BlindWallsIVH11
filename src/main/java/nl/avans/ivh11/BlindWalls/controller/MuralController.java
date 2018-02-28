@@ -111,14 +111,10 @@ public class MuralController {
         // ToDo: volgende acties naar de servicelaag verplaatsen.
         //
 
-        //mural = this.muralRepository.save(mural);
-        mural.setDescription("ikbengoed");
-
-//        redirect.addFlashAttribute("globalMessage", "Successfully created a new message");
-//        return new ModelAndView("redirect:/mural/{mural.id}", "mural.id", mural.getId());
+        mural.setId(mural.getId());
+        mural = this.muralRepository.save(mural);
 
         murals = (ArrayList<Mural>) this.muralRepository.findAll();
-        return new ModelAndView("redirect:/mural/{mural.id}", "mural.id", mural.getId());//return new ModelAndView(VIEW_LIST_MURALS, "murals", murals);
+        return new ModelAndView(VIEW_LIST_MURALS, "murals", murals);
     }
-
 }
