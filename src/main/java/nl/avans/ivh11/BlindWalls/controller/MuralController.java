@@ -1,5 +1,6 @@
 package nl.avans.ivh11.BlindWalls.controller;
 
+import nl.avans.ivh11.BlindWalls.crosscutting.MyExecutionTime;
 import nl.avans.ivh11.BlindWalls.domain.Mural;
 import nl.avans.ivh11.BlindWalls.repository.MuralRepository;
 import org.slf4j.Logger;
@@ -37,6 +38,7 @@ public class MuralController {
         this.muralRepository = muralRepository;
     }
 
+    @MyExecutionTime
     @GetMapping
     public String listMurals(
             @RequestParam(value="category", required=false, defaultValue="all") String category,
