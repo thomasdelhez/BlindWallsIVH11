@@ -21,24 +21,24 @@ public class User {
     @Id
     @GeneratedValue
     private long id;
-    private String firstName; //required
-    private String lastName; //required
+    private String firstname; //required
+    private String lastname; //required
     private String address; //optional
-    private String emailAddress; //required
-    private String userName; //required
+    private String emailaddress; //required
+    private String username; //required
     private String password; //required
-    private int telephoneNumber; //optional
-    private boolean isAdmin; //required
+    private int telephonenumber; //optional
+    private boolean isadmin; //required
 
     private User(UserBuilder builder) {
-        this.firstName = builder.firstName;
-        this.lastName = builder.lastName;
+        this.firstname = builder.firstName;
+        this.lastname = builder.lastName;
         this.address = builder.address;
-        this.telephoneNumber = builder.telephoneNumber;
-        this.userName = builder.userName;
+        this.telephonenumber = builder.telephoneNumber;
+        this.username = builder.userName;
         this.password = builder.password;
-        this.emailAddress = builder.emailAddress;
-        this.isAdmin = builder.isAdmin;
+        this.emailaddress = builder.emailAddress;
+        this.isadmin = builder.isAdmin;
     }
 
     public static class UserBuilder {

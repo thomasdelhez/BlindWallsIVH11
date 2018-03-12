@@ -3,7 +3,6 @@ package nl.avans.ivh11.BlindWalls.controller;
 /**
  * Created by thomasdelhez on 12-03-18.
  */
-import nl.avans.ivh11.BlindWalls.domain.Mural;
 import nl.avans.ivh11.BlindWalls.domain.user.User;
 import nl.avans.ivh11.BlindWalls.repository.UserRepository;
 import org.slf4j.Logger;
@@ -80,7 +79,7 @@ public class UserController {
             final BindingResult bindingResult,
             RedirectAttributes redirect) {
 
-        logger.debug("validateAndSaveMural - adding mural " + user.getFirstName());
+        logger.debug("validateAndSaveMural - adding mural " + user.getFirstname());
         if (bindingResult.hasErrors()) {
             logger.debug("validateAndSaveMural - not added, bindingResult.hasErrors");
             return new ModelAndView(VIEW_CREATE_USER, "formErrors", bindingResult.getAllErrors());

@@ -35,7 +35,7 @@ public class UserService implements IUserService {
      */
     public LoginViewModel authenticate(String userName, String password){
         for (User user: userRepository.findAll()){
-            if(user.getUserName().equals(userName) && user.getPassword().equals(password)){
+            if(user.getUsername().equals(userName) && user.getPassword().equals(password)){
                 UserStateContext userStateContext = new UserStateContext();
                 userStateContext.setState(new Authenticated());
                 return new LoginViewModel(true, user.getId());
@@ -65,7 +65,7 @@ public class UserService implements IUserService {
     @Override
     public User getUser(String userName, String password){
         for(User user: userRepository.findAll()){
-            if(user.getUserName().equals(userName) && user.getPassword().equals(password)) return user;
+            if(user.getUsername().equals(userName) && user.getPassword().equals(password)) return user;
         }
         return null;
     }
