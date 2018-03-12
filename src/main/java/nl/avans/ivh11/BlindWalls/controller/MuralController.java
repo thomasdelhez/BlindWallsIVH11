@@ -1,6 +1,7 @@
 package nl.avans.ivh11.BlindWalls.controller;
 
 import nl.avans.ivh11.BlindWalls.crosscutting.MyExecutionTime;
+import nl.avans.ivh11.BlindWalls.domain.Configuration;
 import nl.avans.ivh11.BlindWalls.domain.Mural;
 import nl.avans.ivh11.BlindWalls.repository.MuralRepository;
 import org.slf4j.Logger;
@@ -32,10 +33,24 @@ public class MuralController {
 
     @Autowired
     private final MuralRepository muralRepository;
-
     // Constructor with Dependency Injection
     public MuralController(MuralRepository muralRepository) {
         this.muralRepository = muralRepository;
+    }
+
+
+    Configuration configurationObject = Configuration.getConfiguration();
+    @RequestMapping(value="/config", method = RequestMethod.GET)
+    public String[] configInfo() {
+        String name = configurationObject.getName();
+        String version = configurationObject.getVersion();
+        int usersint = configurationObject.getUsers();
+        String users = Integer.toString(usersint);
+        String fullinfo[] = new String[2];
+        fullinfo[0] = name;
+        fullinfo[1] = version;
+        fullinfo[2] = users;
+        return fullinfo;
     }
 
     @MyExecutionTime

@@ -9,6 +9,15 @@ public final class Configuration {
 
     private Configuration() {
     }
+    public String getName() {
+        return name;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public int getUsers() { return users; }
 
     public static Configuration getConfiguration(){
         return new Configuration();
