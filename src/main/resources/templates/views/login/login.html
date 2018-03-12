@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/head :: head"></head>
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+
+    <!--<div class="alert alert-success" role="alert">
+        <strong>Success!</strong> It is working as we expected.
+    </div>-->
+
+    <!-- Main component for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <center><h1 th:text="Login" /></center>
+        <h3><center>Inloggen op BlindWalls</center></h3>
+
+        <center><form action="action_page.php">
+
+            <div class="container">
+                <label for="username"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="uname"/>
+                <br/>
+                <label for="password"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw"/>
+                <br/><br/>
+                <button type="submit">Login</button>
+            </div>
+
+            <div class="container">
+                <span class="psw"><a href="#">Wachtwoord vergeten?</a></span>
+            </div>
+        </form></center>
+
+    </div>
+
+</div> <!-- /container -->
+
+<footer class="footer">
+    <div th:replace="fragments/footer :: footer"></div>
+</footer>
+
+</body>
+</html>
