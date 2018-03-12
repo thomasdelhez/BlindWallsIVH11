@@ -1,6 +1,9 @@
 package nl.avans.ivh11.BlindWalls.domain;
 
+import lombok.Getter;
+
 // Singleton for config settings and for other information that only requires one class
+@Getter
 public final class Configuration {
 
     private final String version = "0.1";
