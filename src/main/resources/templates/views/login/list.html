@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/head :: head"></head>
+<body>
+
+<!-- Header -->
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+
+    <div class="page-header">
+        <h1>Lijst van users</h1>
+    </div>
+
+    <div th:if="${users.empty}">
+        <p>Geen users gevonden.</p>
+    </div>
+
+    <table th:if="!${users.empty}" class="table table-hover">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Naam</th>
+            <th>Omschrijving</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}">Id</td>
+            <td><a th:href="@{/user/{id}(id=${user.id})}" th:text="${user.firstName}">Voornaam</a></td>
+            <!--<td th:text="${user.lastName}">Achternaam</td>-->
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<footer class="footer">
+    <div th:replace="fragments/footer :: footer"></div>
+</footer>
+</body>
+</html>

@@ -23,47 +23,50 @@ public class User {
     private long id;
     private String firstName; //required
     private String lastName; //required
-    private String address; //required
+    private String address; //optional
     private String emailAddress; //required
     private String userName; //required
     private String password; //required
-    private int age; //required
     private int telephoneNumber; //optional
+    private boolean isAdmin; //required
 
     private User(UserBuilder builder) {
         this.firstName = builder.firstName;
         this.lastName = builder.lastName;
         this.address = builder.address;
-        this.age = builder.age;
         this.telephoneNumber = builder.telephoneNumber;
         this.userName = builder.userName;
         this.password = builder.password;
         this.emailAddress = builder.emailAddress;
+        this.isAdmin = builder.isAdmin;
     }
 
     public static class UserBuilder {
-
         private final String firstName;
         private final String lastName;
-        private final String address;
-        private final int age;
+        private String address;
         private int telephoneNumber;
         private final String userName;
         private final String password;
         private final String emailAddress;
+        private boolean isAdmin;
 
-        public UserBuilder(String firstName, String lastName, String address, int age, String userName, String password, String emailAddress) {
+        public UserBuilder(String firstName, String lastName, String userName, String password, String emailAddress) {
             this.firstName = firstName;
             this.lastName = lastName;
-            this.address = address;
-            this.age = age;
             this.userName = userName;
             this.password = password;
             this.emailAddress = emailAddress;
+            this.isAdmin = false;
         }
 
         public UserBuilder telephoneNumber(int telephoneNumber) {
             this.telephoneNumber = telephoneNumber;
+            return this;
+        }
+
+        public UserBuilder address(String address){
+            this.address = address;
             return this;
         }
 
