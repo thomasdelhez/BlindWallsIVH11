@@ -9,26 +9,33 @@
 <div class="container">
 
     <div class="page-header">
-        <h1>Lijst van users</h1>
+        <h1>Lijst van artiesten</h1>
     </div>
 
     <div th:if="${users.empty}">
-        <p>Geen users gevonden.</p>
+        <p>Geen artiesten gevonden.</p>
     </div>
 
     <table th:if="!${users.empty}" class="table table-hover">
         <thead>
         <tr>
-            <th>Id</th>
-            <th>Naam</th>
-            <th>Omschrijving</th>
+            <th>Voornaam</th>
+            <th>Achternaam</th>
+            <th>Usernaam</th>
+            <th>Emailadres</th>
+            <th>Telefoon</th>
+            <th>Adres</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="user : ${users}">
-            <td th:text="${user.id}">Id</td>
-            <td><a th:href="@{/user/{id}(id=${user.id})}" th:text="${user.firstname}">Voornaam</a></td>
-            <!--<td th:text="${user.lastname}">Achternaam</td>-->
+            <td th:text="${user.firstname}">Voornaam</td>
+            <td th:text="${user.lastname}">Achternaam</td>
+            <td th:text="${user.username}">Usernaam</td>
+            <td th:text="${user.emailaddress}">Emailadres</td>
+            <td th:text="${user.telephonenumber}">Telefoon</td>
+            <td th:text="${user.address}">Adres</td>
+
         </tr>
         </tbody>
     </table>

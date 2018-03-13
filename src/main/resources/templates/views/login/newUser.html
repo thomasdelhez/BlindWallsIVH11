@@ -87,6 +87,26 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="telephonenumber">Telefoon</label>
+                    <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'repository'-->
+                    <input type="text" class="form-control" id="telephonenumber" th:field="*{telephonenumber}"/>
+                    <p th:if="${#fields.hasErrors('telephonenumber')}" th:errors="*{telephonenumber}">Telefoonnummber Error</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="address">Adres</label>
+                    <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'repository'-->
+                    <input type="text" class="form-control" id="address" th:field="*{address}"/>
+                    <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Adres Error</p>
+                </div>
+            </div>
+        </div>
         <!-- De button die voor verzenden van het formulier zorgt.
             De name 'save' is een parameter waarmee in de MemberController de juiste
             save-actie wordt gestart. -->
