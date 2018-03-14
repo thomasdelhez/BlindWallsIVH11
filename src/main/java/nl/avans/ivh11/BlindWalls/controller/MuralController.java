@@ -52,6 +52,7 @@ public class MuralController {
     public MuralController(IMuralService muralService, MuralRepository muralRepository) {
         this.muralService = muralService;
         this.muralRepository = muralRepository;
+        getMuralsFromDB();
     }
 
     @MyExecutionTime
@@ -136,7 +137,7 @@ public class MuralController {
         return new ModelAndView(VIEW_LIST_MURALS, "murals", murals);
     }
 
-    private List<Mural> getAllMuralsFromAPI() throws JSONException {
+    private ArrayList<String> getAllMuralsFromAPI() throws JSONException {
         InputStream inputStream;
         String response = "";
 
@@ -161,16 +162,22 @@ public class MuralController {
             return null;
         }
 
-        ArrayList<Mural> murals = new ArrayList<Mural>();
+        ArrayList<String> murals = new ArrayList<>();
         JSONArray jsonArray = new JSONArray(response);
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject obj = jsonArray.getJSONObject(i);
             JSONArray jsonArray2 = obj.getJSONArray("id");
+
+            if(jsonArray2 != null) {
+                for (int x = 0; x < jsonArray2.length(); x++){
+                    murals.add(jsonArray2.getString(x));
+                }
+            }
         }
 
         return murals;
-
     }
+
     private String getStringFromInputStream(InputStream inputStream) {
         BufferedReader br = null;
         StringBuilder sb = new StringBuilder();

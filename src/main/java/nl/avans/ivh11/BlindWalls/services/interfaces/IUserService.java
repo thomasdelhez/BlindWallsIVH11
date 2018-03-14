@@ -1,4 +1,4 @@
-package nl.avans.ivh11.BlindWalls.service;
+package nl.avans.ivh11.BlindWalls.services.interfaces;
 
 import nl.avans.ivh11.BlindWalls.domain.user.User;
 import nl.avans.ivh11.BlindWalls.model.LoginViewModel;

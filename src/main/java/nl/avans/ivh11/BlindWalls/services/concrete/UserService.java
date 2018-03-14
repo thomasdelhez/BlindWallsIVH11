@@ -1,4 +1,4 @@
-package nl.avans.ivh11.BlindWalls.service;
+package nl.avans.ivh11.BlindWalls.services.concrete;
 
 /**
  * Created by thomasdelhez on 12-03-18.
@@ -10,6 +10,7 @@ import nl.avans.ivh11.BlindWalls.domain.user.UserStateContext;
 import nl.avans.ivh11.BlindWalls.model.LoginViewModel;
 import nl.avans.ivh11.BlindWalls.model.UserViewModel;
 import nl.avans.ivh11.BlindWalls.repository.UserRepository;
+import nl.avans.ivh11.BlindWalls.services.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import lombok.Getter;

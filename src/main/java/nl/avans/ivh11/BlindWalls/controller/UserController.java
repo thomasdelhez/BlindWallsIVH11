@@ -6,7 +6,7 @@ package nl.avans.ivh11.BlindWalls.controller;
 import nl.avans.ivh11.BlindWalls.domain.user.User;
 import nl.avans.ivh11.BlindWalls.model.LoginViewModel;
 import nl.avans.ivh11.BlindWalls.repository.UserRepository;
-import nl.avans.ivh11.BlindWalls.service.UserService;
+import nl.avans.ivh11.BlindWalls.services.concrete.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
