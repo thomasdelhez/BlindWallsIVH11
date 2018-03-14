@@ -5,9 +5,13 @@ package nl.avans.ivh11.BlindWalls.domain.user;
  */
 public class Authenticated implements UserStateInterface {
 
+    public Authenticated(){
+        logged();
+    }
+
     @Override
     public void logged() {
-        System.out.println("You successfully logged in");
+        System.out.println("State: Authenticated");
     }
 }
 

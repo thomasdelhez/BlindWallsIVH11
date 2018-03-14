@@ -4,7 +4,9 @@ package nl.avans.ivh11.BlindWalls.controller;
  * Created by thomasdelhez on 12-03-18.
  */
 import nl.avans.ivh11.BlindWalls.domain.user.User;
+import nl.avans.ivh11.BlindWalls.model.LoginViewModel;
 import nl.avans.ivh11.BlindWalls.repository.UserRepository;
+import nl.avans.ivh11.BlindWalls.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,8 @@ public class UserController {
 
     private final Logger logger = LoggerFactory.getLogger(UserController.class);
     private ArrayList<User> users = new ArrayList<>();
+    private User loggedinUser = null;
+    private LoginViewModel loggedinUser2 = null;
 
     //Views Constants
     private final String VIEW_CREATE_USER = "views/login/newUser";
@@ -35,12 +39,13 @@ public class UserController {
     private final String VIEW_LOGIN_USER = "views/login/userLogin";
 
     @Autowired
-    private final UserRepository userRepository;
+    private UserRepository userRepository = null;
 
     // Constructor with Dependency Injection
     public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+    //UserService userService = new UserService(userRepository);
 
 
     @GetMapping
@@ -67,6 +72,36 @@ public class UserController {
         return VIEW_LOGIN_USER;
     }
 
+    @RequestMapping(value="/userLogin", method = RequestMethod.POST)
+    public ModelAndView validateAndLoginUser(
+            @Valid User user,
+            final BindingResult bindingResult,
+            RedirectAttributes redirect) {
+
+        logger.debug("validateAndLoginUser - login in user " + user.getUsername());
+        if (bindingResult.hasErrors()) {
+            logger.debug("validateAndLoginUser - not logged in, bindingResult.hasErrors");
+            return new ModelAndView(VIEW_LOGIN_USER, "formErrors", bindingResult.getAllErrors());
+        }
+
+        UserService userService = new UserService(userRepository);
+        loggedinUser = userService.getUser(user.getUsername(), user.getPassword());
+
+        if (loggedinUser != null){
+            logger.debug("user ingelogd " + loggedinUser.getFirstname() + " " + loggedinUser.getLastname());
+            userService.authenticate(user.getUsername(), user.getPassword());
+            logger.debug("user authenticated " + loggedinUser.getFirstname() + " " + loggedinUser.getLastname());
+
+            users = (ArrayList<User>) this.userRepository.findAll();
+
+            return new ModelAndView(VIEW_LIST_USERS, "users", users);}
+
+        else {
+            String error = "error";
+            return new ModelAndView(VIEW_LOGIN_USER, "error", error);
+        }
+    }
+
     @RequestMapping(value="/newUser", method = RequestMethod.GET)
     public String showNewUserForm(final User user, final ModelMap model) {
         logger.debug("showNewUserForm");
@@ -79,20 +114,16 @@ public class UserController {
             final BindingResult bindingResult,
             RedirectAttributes redirect) {
 
-        logger.debug("validateAndSaveMural - adding mural " + user.getFirstname());
+        logger.debug("validateAndSaveUser - adding mural " + user.getFirstname());
         if (bindingResult.hasErrors()) {
-            logger.debug("validateAndSaveMural - not added, bindingResult.hasErrors");
+            logger.debug("validateAndSaveUser - not added, bindingResult.hasErrors");
             return new ModelAndView(VIEW_CREATE_USER, "formErrors", bindingResult.getAllErrors());
         }
 
-        //
-        // ToDo: volgende acties naar de servicelaag verplaatsen.
-        //
+        UserService userService = new UserService(userRepository);
+        userService.addUser(user);
 
-        user = this.userRepository.save(user);
-
-//        redirect.addFlashAttribute("globalMessage", "Successfully created a new message");
-//        return new ModelAndView("redirect:/mural/{mural.id}", "mural.id", mural.getId());
+        //users = userService.getAllUsers();
 
         users = (ArrayList<User>) this.userRepository.findAll();
         return new ModelAndView(VIEW_LIST_USERS, "users", users);

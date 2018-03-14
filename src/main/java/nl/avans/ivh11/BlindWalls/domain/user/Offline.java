@@ -5,9 +5,13 @@ package nl.avans.ivh11.BlindWalls.domain.user;
  */
 public class Offline implements UserStateInterface {
 
+    public Offline(){
+            logged();
+    }
+
     @Override
     public void logged() {
-        System.out.println("You are offline");
+        System.out.println("State: Offline");
     }
 }
 

@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Created by thomasdelhez on 12-03-18.
  */
 @Getter
-public class UserViewModel {
+public class UserViewModel extends ArrayList<User> {
     private final Iterable<User> users;
 
     public UserViewModel(ArrayList<User> allUsers) {
