@@ -137,7 +137,7 @@ public class MuralController {
         return new ModelAndView(VIEW_LIST_MURALS, "murals", murals);
     }
 
-    private ArrayList<String> getAllMuralsFromAPI() throws JSONException {
+    private ArrayList<Mural> getAllMuralsFromAPI() throws JSONException {
         InputStream inputStream;
         String response = "";
 
@@ -162,17 +162,23 @@ public class MuralController {
             return null;
         }
 
-        ArrayList<String> murals = new ArrayList<>();
+        ArrayList<Mural> murals = new ArrayList<>();
+
         JSONArray jsonArray = new JSONArray(response);
         for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject obj = jsonArray.getJSONObject(i);
-            JSONArray jsonArray2 = obj.getJSONArray("id");
+//            JSONObject obj = jsonArray.getJSONObject(i);
+//            JSONArray jsonArray2 = obj.getJSONArray("id");
 
-            if(jsonArray2 != null) {
-                for (int x = 0; x < jsonArray2.length(); x++){
-                    murals.add(jsonArray2.getString(x));
-                }
-            }
+            Mural mural = new Mural();
+            mural.setId((long) jsonArray.getJSONObject(i).getInt("id"));
+            mural.setName(jsonArray.getJSONObject(i).getString("title"));
+            mural.setDescription(jsonArray.getJSONObject(i).getString("description"));
+
+            murals.add(mural);
+        }
+
+        if(murals != null) {
+            muralRepository.save(murals);
         }
 
         return murals;
