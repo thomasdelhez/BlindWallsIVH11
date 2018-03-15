@@ -5,10 +5,12 @@ import nl.avans.ivh11.BlindWalls.viewModel.MuralViewModel;
 import org.json.JSONException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface IMuralService {
 
     MuralViewModel getAllMurals(long muralId);
     boolean getMuralsFromDB();
+    ArrayList<Mural> getAllMuralsFromAPI() throws JSONException;
 }
