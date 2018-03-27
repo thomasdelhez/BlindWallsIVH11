@@ -14,13 +14,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.ArrayList;
 
@@ -37,6 +36,8 @@ public class UserController {
     private final String VIEW_CREATE_USER = "views/login/newUser";
     private final String VIEW_LIST_USERS = "views/login/list";
     private final String VIEW_LOGIN_USER = "views/login/userLogin";
+    private final String VIEW_LOGIN_SUCCESS = "views/login/loginSuccess";
+    private final String VIEW_LOGOUT_USER = "views/login/logout";
 
     @Autowired
     private UserRepository userRepository = null;
@@ -76,7 +77,9 @@ public class UserController {
     public ModelAndView validateAndLoginUser(
             @Valid User user,
             final BindingResult bindingResult,
-            RedirectAttributes redirect) {
+            RedirectAttributes redirect,
+            @CookieValue(value = "userCookie", defaultValue = "") String userCookie,
+            HttpServletResponse response) {
 
         logger.debug("validateAndLoginUser - login in user " + user.getUsername());
         if (bindingResult.hasErrors()) {
@@ -92,9 +95,20 @@ public class UserController {
             userService.authenticate(user.getUsername(), user.getPassword());
             logger.debug("user authenticated " + loggedinUser.getFirstname() + " " + loggedinUser.getLastname());
 
+
+            userCookie = loggedinUser.getUsername();
+            Cookie cookie = new Cookie("userCookie", userCookie);
+            cookie.setMaxAge(1000);
+            response.addCookie(cookie);
+
+
             users = (ArrayList<User>) this.userRepository.findAll();
 
-            return new ModelAndView(VIEW_LIST_USERS, "users", users);}
+            ModelAndView mav = new ModelAndView(VIEW_LOGIN_SUCCESS);
+            //mav.addObject("cookie", cookie);
+
+
+            return mav;}
 
         else {
             String error = "error";
@@ -127,6 +141,13 @@ public class UserController {
 
         users = (ArrayList<User>) this.userRepository.findAll();
         return new ModelAndView(VIEW_LIST_USERS, "users", users);
+    }
+
+    @RequestMapping(value = "/logout")
+    public String logout(Model model) {
+        logger.info("logout method was called.");
+        logger.debug("returning views/login/logout");
+        return VIEW_LOGOUT_USER;
     }
 
 }

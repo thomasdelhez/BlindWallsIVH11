@@ -9,6 +9,7 @@
 </head>
 <body>
 
+
 <!-- Static navbar -->
 <nav class="navbar navbar-default navbar-static-top" th:fragment="header">
     <div class="container">
@@ -49,8 +50,32 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/login">Artiesten</a></li>
-                <li><a href="/login/userLogin">Login</a></li>
-                <li><a href="/login/newUser">Registreer</a></li>
+                <li><a href="/login/userLogin" id="loginuser">Login</a></li>
+                <li><a href="/login/newUser" id="register">Registreer</a></li>
+
+
+                <script>function getCookie(name)
+                {
+                var re = new RegExp(name + "=([^;]+)");
+                var value = re.exec(document.cookie);
+                return (value != null) ? unescape(value[1]) : null;
+                }</script>
+
+                <script>
+                var x = getCookie("userCookie");
+                if(x == null){
+                    x = "Login";
+                }
+                else{
+                    var a = document.getElementById('register');
+                    a.href = "/login/logout";
+                    document.getElementById("register").innerHTML = "Logout";
+                    document.getElementById("loginuser").innerHTML = x;
+                    var b = document.getElementById('loginuser');
+                    b.href = "/login/userDetails";
+                }
+
+                </script>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
