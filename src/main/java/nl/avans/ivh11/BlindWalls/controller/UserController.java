@@ -106,8 +106,6 @@ public class UserController {
 
             ModelAndView mav = new ModelAndView(VIEW_LOGIN_SUCCESS);
             //mav.addObject("cookie", cookie);
-
-
             return mav;}
 
         else {
@@ -143,11 +141,10 @@ public class UserController {
         return new ModelAndView(VIEW_LIST_USERS, "users", users);
     }
 
-    @RequestMapping(value = "/logout")
-    public String logout(Model model) {
+    @RequestMapping(value ="/logout")
+    public String logout() {
         logger.info("logout method was called.");
         logger.debug("returning views/login/logout");
         return VIEW_LOGOUT_USER;
     }
-
 }
