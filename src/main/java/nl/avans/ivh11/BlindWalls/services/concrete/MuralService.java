@@ -1,12 +1,11 @@
 package nl.avans.ivh11.BlindWalls.services.concrete;
 
-import nl.avans.ivh11.BlindWalls.domain.Mural;
+import nl.avans.ivh11.BlindWalls.domain.mural.Mural;
 import nl.avans.ivh11.BlindWalls.repository.MuralRepository;
 import nl.avans.ivh11.BlindWalls.services.interfaces.IMuralService;
 import nl.avans.ivh11.BlindWalls.viewModel.MuralViewModel;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class MuralService implements IMuralService {
@@ -73,8 +71,6 @@ public class MuralService implements IMuralService {
 
         JSONArray jsonArray = new JSONArray(response);
         for (int i = 0; i < jsonArray.length(); i++) {
-//            JSONObject obj = jsonArray.getJSONObject(i);
-//            JSONArray jsonArray2 = obj.getJSONArray("id");
 
             Mural mural = new Mural();
             mural.setId((long) jsonArray.getJSONObject(i).getInt("id"));

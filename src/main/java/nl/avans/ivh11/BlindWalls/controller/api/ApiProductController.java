@@ -1,6 +1,6 @@
 package nl.avans.ivh11.BlindWalls.controller.api;
 
-import nl.avans.ivh11.BlindWalls.domain.Mural;
+import nl.avans.ivh11.BlindWalls.domain.mural.Mural;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;

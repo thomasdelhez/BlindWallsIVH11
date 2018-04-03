@@ -1,6 +1,6 @@
 package nl.avans.ivh11.BlindWalls.viewModel;
 
-import nl.avans.ivh11.BlindWalls.domain.Mural;
+import nl.avans.ivh11.BlindWalls.domain.mural.Mural;
 
 public class MuralViewModel {
 
