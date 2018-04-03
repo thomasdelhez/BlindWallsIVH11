@@ -15,7 +15,7 @@ public class HomeController {
     public String index(Model model) {
         logger.info("index method was called.");
 
-        model.addAttribute("title", "Hier de titel");
+        model.addAttribute("title", "Home");
         logger.debug("returning views/home/index.");
         return "views/home/index";
     }

@@ -38,6 +38,7 @@ public class UserController {
     private final String VIEW_LOGIN_USER = "views/login/userLogin";
     private final String VIEW_LOGIN_SUCCESS = "views/login/loginSuccess";
     private final String VIEW_LOGOUT_USER = "views/login/logout";
+    private final String VIEW_READ_USER = "views/login/userDetails";
 
     @Autowired
     private UserRepository userRepository = null;
@@ -147,6 +148,11 @@ public class UserController {
         model.addAttribute("title", "User Login");
         logger.debug("returning views/login/logout");
         return VIEW_LOGOUT_USER;
+    }
+
+    @GetMapping("{userName}")
+    public ModelAndView userDetails(@PathVariable("userName") User user) {
+        return new ModelAndView(VIEW_READ_USER, "user", user);
     }
 
 

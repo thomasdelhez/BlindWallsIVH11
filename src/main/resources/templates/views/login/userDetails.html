@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/head :: head"></head>
+<body>
+
+<!-- Navigation header -->
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+
+    <div class="page-header">
+        <h1>Muur</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2 th:text="${user.firstName}">Voornaam</h2>
+                    <div class="row">
+                        <div class="col-xs-9">
+                            <p>
+                                <span th:text="${user.lastName}">Achternaam</span><br/>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--<a class="btn btn-default" th:href="'/mural/' + ${mural.id} + '/edit'" role="button">Wijzig</a>-->
+            <!--<a class="btn btn-default" th:href="'/mural/' + ${mural.id} + '/delete'" role="button">Delete</a>-->
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div th:replace="fragments/footer :: footer"></div>
+</footer>
+</body>
+</html>

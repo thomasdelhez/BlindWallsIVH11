@@ -51,7 +51,7 @@
                 <div class="col-sm-12">
                     <div class="form-group">
                         <label for="description">Omschrijving</label>
-                        <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'repository'-->
+                        <!-- th:field="*{description}" is de koppeling naar het attribuut 'name' van het object 'repository'-->
                         <input type="text" class="form-control" id="description" th:field="*{description}"/>
                         <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Omschrijving Error</p>
                     </div>
