@@ -68,7 +68,7 @@ public class UserController {
     public String login(Model model) {
         logger.info("login method was called.");
 
-        model.addAttribute("title", "Hier de titel");
+        model.addAttribute("title", "User Login");
         logger.debug("returning views/login/login.");
         return VIEW_LOGIN_USER;
     }
@@ -98,7 +98,7 @@ public class UserController {
 
             userCookie = loggedinUser.getUsername();
             Cookie cookie = new Cookie("userCookie", userCookie);
-            cookie.setMaxAge(1000);
+            cookie.setMaxAge(50);
             response.addCookie(cookie);
 
 
@@ -142,9 +142,12 @@ public class UserController {
     }
 
     @RequestMapping(value ="/logout")
-    public String logout() {
+    public String logout(Model model) {
         logger.info("logout method was called.");
+        model.addAttribute("title", "User Login");
         logger.debug("returning views/login/logout");
         return VIEW_LOGOUT_USER;
     }
+
+
 }

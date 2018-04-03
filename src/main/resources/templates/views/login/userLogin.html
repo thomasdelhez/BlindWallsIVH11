@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="fragments/head :: head"></head>
+<head th:replace="fragments/head :: head">
+</head>
 <body>
 
 <div th:replace="fragments/header :: header"></div>
+
+<script>
+var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)userCookie\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+document.cookie = "username=" + cookieValue;</script>
 
 <div class="container">
 

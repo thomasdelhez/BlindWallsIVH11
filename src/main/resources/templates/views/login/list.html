@@ -2,7 +2,9 @@
 <html>
 <head th:replace="fragments/head :: head"></head>
 <body>
-<script>document.cookie = document.cookie;</script>
+<script>
+var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)userCookie\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+document.cookie = "username=" + cookieValue;</script>
 <!-- Header -->
 <div th:replace="fragments/header :: header"></div>
 

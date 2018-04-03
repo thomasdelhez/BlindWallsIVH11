@@ -3,21 +3,19 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Logout success</title>
-    <script>function deleteAllCookies() {
-    var cookies = document.cookie.split(";");
-
-    for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i];
-        var eqPos = cookie.indexOf("=");
-        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-    }
-}
-    </script>
-    <script>deleteAllCookies();</script>
-    <script>window.location.href = "/userLogin";</script>
 </head>
 <body>
+<!--<script>-->
+    <!--var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)userCookie\s*\=\s*([^;]*).*$)|^.*$/, "$1");-->
+    <!--document.cookie = "username=" + cookieValue + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';</script>-->
+<script>var delete_cookie = function(name) {
+document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+document.cookie = "username" + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+};
+</script>
+<script>delete_cookie('userCookie');</script>
+<script>delete_cookie('username');</script>
+<script>window.location.href = "/login/userLogin";</script>
 
 </body>
 </html>
