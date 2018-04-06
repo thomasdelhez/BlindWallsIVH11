@@ -7,6 +7,7 @@ package nl.avans.ivh11.BlindWalls.domain.user;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,14 +22,19 @@ public class User {
     @Id
     @GeneratedValue
     private long id;
+    @NotEmpty(message = "Voornaam is verplicht.")
     private String firstname; //required
+    @NotEmpty(message = "Achternaam is verplicht.")
     private String lastname; //required
     private String address; //optional
+    @NotEmpty(message = "Email is verplicht.")
     private String emailaddress; //required
+    @NotEmpty(message = "Usernaam is verplicht.")
     private String username; //required
+    @NotEmpty(message = "Password is verplicht.")
     private String password; //required
     private int telephonenumber; //optional
-    private boolean isadmin; //required
+    private boolean isadmin; //auto
 
     private User(UserBuilder builder) {
         this.firstname = builder.firstName;

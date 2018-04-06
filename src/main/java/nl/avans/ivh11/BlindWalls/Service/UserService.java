@@ -5,6 +5,7 @@ package nl.avans.ivh11.BlindWalls.service;
  */
 
 import nl.avans.ivh11.BlindWalls.domain.user.Authenticated;
+import nl.avans.ivh11.BlindWalls.domain.user.Offline;
 import nl.avans.ivh11.BlindWalls.domain.user.User;
 import nl.avans.ivh11.BlindWalls.domain.user.UserStateContext;
 import nl.avans.ivh11.BlindWalls.model.LoginViewModel;
@@ -39,6 +40,17 @@ public class UserService implements IUserService {
                 UserStateContext userStateContext = new UserStateContext();
                 userStateContext.setState(new Authenticated());
                 return new LoginViewModel(true, user.getId());
+            }
+        }
+        return new LoginViewModel(false, -1);
+    }
+
+    public LoginViewModel stateOffline(String userName){
+        for (User user: userRepository.findAll()){
+            if(user.getUsername().equals(userName)){
+                UserStateContext userStateContext = new UserStateContext();
+                userStateContext.setState(new Offline());
+                return new LoginViewModel(false, user.getId());
             }
         }
         return new LoginViewModel(false, -1);

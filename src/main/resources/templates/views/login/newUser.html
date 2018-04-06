@@ -41,7 +41,7 @@
             <div class="col-sm-4">
                 <div class="form-group">
                     <label for="firstname">Voornaam</label>
-                    <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'repository'-->
+                    <!-- th:field="*{name}" is de koppeling naar het attribuut 'firstname' van het object 'repository'-->
                     <input type="text" class="form-control" id="firstname" th:field="*{firstname}"/>
                     <p th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}">Voornaam Error</p>
                 </div>
@@ -50,10 +50,10 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="form-group">
-                    <label for="lastname">Achternaamnaam</label>
-                    <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'repository'-->
+                    <label for="lastname">Achternaam</label>
+                    <!-- th:field="*{name}" is de koppeling naar het attribuut 'lastname' van het object 'repository'-->
                     <input type="text" class="form-control" id="lastname" th:field="*{lastname}"/>
-                    <p th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">Voornaam Error</p>
+                    <p th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">Achternaam Error</p>
                 </div>
             </div>
         </div>
@@ -61,7 +61,7 @@
             <div class="col-sm-4">
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'repository'-->
+                    <!-- th:field="*{name}" is de koppeling naar het attribuut 'username' van het object 'repository'-->
                     <input type="text" class="form-control" id="username" th:field="*{username}"/>
                     <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</p>
                 </div>
@@ -71,7 +71,7 @@
             <div class="col-sm-4">
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'repository'-->
+                    <!-- th:field="*{name}" is de koppeling naar het attribuut 'password' van het object 'repository'-->
                     <input type="text" class="form-control" id="password" th:field="*{password}"/>
                     <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</p>
                 </div>
@@ -81,7 +81,7 @@
             <div class="col-sm-4">
                 <div class="form-group">
                     <label for="emailaddress">EmailAdres</label>
-                    <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'repository'-->
+                    <!-- th:field="*{name}" is de koppeling naar het attribuut 'emailaddress' van het object 'repository'-->
                     <input type="text" class="form-control" id="emailaddress" th:field="*{emailaddress}"/>
                     <p th:if="${#fields.hasErrors('emailaddress')}" th:errors="*{emailaddress}">EmailAdres Error</p>
                 </div>
@@ -91,7 +91,7 @@
             <div class="col-sm-4">
                 <div class="form-group">
                     <label for="telephonenumber">Telefoon</label>
-                    <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'repository'-->
+                    <!-- th:field="*{name}" is de koppeling naar het attribuut 'telephonenumber' van het object 'repository'-->
                     <input type="text" class="form-control" id="telephonenumber" th:field="*{telephonenumber}"/>
                     <p th:if="${#fields.hasErrors('telephonenumber')}" th:errors="*{telephonenumber}">Telefoonnummber Error</p>
                 </div>
@@ -101,14 +101,14 @@
             <div class="col-sm-4">
                 <div class="form-group">
                     <label for="address">Adres</label>
-                    <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'repository'-->
+                    <!-- th:field="*{name}" is de koppeling naar het attribuut 'address' van het object 'repository'-->
                     <input type="text" class="form-control" id="address" th:field="*{address}"/>
                     <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Adres Error</p>
                 </div>
             </div>
         </div>
         <!-- De button die voor verzenden van het formulier zorgt.
-            De name 'save' is een parameter waarmee in de MemberController de juiste
+            De name 'save' is een parameter waarmee in de UserController de juiste
             save-actie wordt gestart. -->
         <button type="submit" class="btn btn-primary" name="save">Opslaan</button>
     </form>

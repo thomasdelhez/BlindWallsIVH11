@@ -3,6 +3,7 @@ package nl.avans.ivh11.BlindWalls.controller;
 /**
  * Created by thomasdelhez on 12-03-18.
  */
+import lombok.experimental.var;
 import nl.avans.ivh11.BlindWalls.domain.user.User;
 import nl.avans.ivh11.BlindWalls.model.LoginViewModel;
 import nl.avans.ivh11.BlindWalls.repository.UserRepository;
@@ -31,6 +32,7 @@ public class UserController {
     private ArrayList<User> users = new ArrayList<>();
     private User loggedinUser = null;
     private LoginViewModel loggedinUser2 = null;
+    private SingleObject singleObject = SingleObject.getInstance();
 
     //Views Constants
     private final String VIEW_CREATE_USER = "views/login/newUser";
@@ -59,9 +61,12 @@ public class UserController {
         logger.debug("listUsers called.");
         Iterable<User> users = userRepository.findAll();
 
+        ArrayList<User> loggedInUsers = singleObject.getLoggedinUsers();
+
         model.addAttribute("category", category);
         model.addAttribute("size", size);
         model.addAttribute("users", users);
+        model.addAttribute("loggedInUsers", loggedInUsers);
         return VIEW_LIST_USERS;
     }
 
@@ -83,10 +88,6 @@ public class UserController {
             HttpServletResponse response) {
 
         logger.debug("validateAndLoginUser - login in user " + user.getUsername());
-        if (bindingResult.hasErrors()) {
-            logger.debug("validateAndLoginUser - not logged in, bindingResult.hasErrors");
-            return new ModelAndView(VIEW_LOGIN_USER, "formErrors", bindingResult.getAllErrors());
-        }
 
         UserService userService = new UserService(userRepository);
         loggedinUser = userService.getUser(user.getUsername(), user.getPassword());
@@ -94,8 +95,8 @@ public class UserController {
         if (loggedinUser != null){
             logger.debug("user ingelogd " + loggedinUser.getFirstname() + " " + loggedinUser.getLastname());
             userService.authenticate(user.getUsername(), user.getPassword());
+            singleObject.addUserToSingleton(loggedinUser);
             logger.debug("user authenticated " + loggedinUser.getFirstname() + " " + loggedinUser.getLastname());
-
 
             userCookie = loggedinUser.getUsername();
             Cookie cookie = new Cookie("userCookie", userCookie);
@@ -127,7 +128,7 @@ public class UserController {
             final BindingResult bindingResult,
             RedirectAttributes redirect) {
 
-        logger.debug("validateAndSaveUser - adding mural " + user.getFirstname());
+        logger.debug("validateAndSaveUser - adding user " + user.getFirstname());
         if (bindingResult.hasErrors()) {
             logger.debug("validateAndSaveUser - not added, bindingResult.hasErrors");
             return new ModelAndView(VIEW_CREATE_USER, "formErrors", bindingResult.getAllErrors());
@@ -135,8 +136,6 @@ public class UserController {
 
         UserService userService = new UserService(userRepository);
         userService.addUser(user);
-
-        //users = userService.getAllUsers();
 
         users = (ArrayList<User>) this.userRepository.findAll();
         return new ModelAndView(VIEW_LIST_USERS, "users", users);
@@ -146,14 +145,23 @@ public class UserController {
     public String logout(Model model) {
         logger.info("logout method was called.");
         model.addAttribute("title", "User Login");
+
+        singleObject.removeUserFromSingleton(loggedinUser);
         logger.debug("returning views/login/logout");
         return VIEW_LOGOUT_USER;
     }
 
-    @GetMapping("{userName}")
-    public ModelAndView userDetails(@PathVariable("userName") User user) {
+    @GetMapping("{id}")
+    public ModelAndView userDetails(@PathVariable("id") User user) {
+        user.setId(loggedinUser.getId());
+        user.setUsername(loggedinUser.getUsername());
+        user.setFirstname(loggedinUser.getFirstname());
+        user.setLastname(loggedinUser.getLastname());
         return new ModelAndView(VIEW_READ_USER, "user", user);
     }
-
+//        if (bindingResult.hasErrors()) {
+//            logger.debug("validateAndLoginUser - not logged in, bindingResult.hasErrors");
+//            return new ModelAndView(VIEW_LOGIN_USER, "formErrors", bindingResult.getAllErrors());
+//        }
 
 }

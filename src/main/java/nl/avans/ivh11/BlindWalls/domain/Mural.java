@@ -13,10 +13,10 @@ public class Mural {
     @GeneratedValue
     private Long id;
 
-    @NotEmpty(message = "Message may not be empty.")
+    @NotEmpty(message = "Name may not be empty.")
     private String name;
 
-    @NotEmpty(message = "Message is required.")
+    @NotEmpty(message = "Description is required.")
     private String description;
 
     public Mural() {}

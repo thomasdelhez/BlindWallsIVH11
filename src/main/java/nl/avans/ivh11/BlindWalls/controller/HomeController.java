@@ -15,6 +15,9 @@ public class HomeController {
     public String index(Model model) {
         logger.info("index method was called.");
 
+        SingleObject object = SingleObject.getInstance();
+        SingleObject object2 = SingleObject.getInstance();
+
         model.addAttribute("title", "Home");
         logger.debug("returning views/home/index.");
         return "views/home/index";

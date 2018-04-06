@@ -37,10 +37,16 @@ document.cookie = "username=" + cookieValue;</script>
             <td th:text="${user.emailaddress}">Emailadres</td>
             <td th:text="${user.telephonenumber}">Telefoon</td>
             <td th:text="${user.address}">Adres</td>
-
         </tr>
         </tbody>
     </table>
+
+    <div>
+        <p>Alle ingelogde gebruikers: </p>
+        <p th:each="user : ${loggedInUsers}">
+        <td th:text="${user.username}">Usernaam</td>
+        </p>
+    </div>
 </div>
 
 <footer class="footer">
